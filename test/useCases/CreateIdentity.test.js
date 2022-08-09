@@ -8,7 +8,15 @@ describe('CreateIdentity', () => {
       units: 1,
     }
     const eventsApiHttpClient = new EventsApiHttpClientInMemory()
+    eventsApiHttpClient.feedIdentityResponse({
+      code: 201,
+      data: {
+        ids: [1],
+      },
+    })
+
     const response = await CreateIdentity({ data, eventsApiHttpClient })
+
     expect(response).toEqual(eventsApiHttpClient.postIdentities201Response)
   })
 })
