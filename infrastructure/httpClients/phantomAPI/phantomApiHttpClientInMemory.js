@@ -3,24 +3,7 @@ const { endpoints } = require('./endpoints')
 class PhantomApiHttpClientInMemory {
   postEvents201Response
 
-  postSendEvents201Response = {
-    code: 201,
-    data: {
-      id: 42,
-      identityId: 1,
-      sentDate: '2022-05-10T12:27:33.105Z',
-      eventTypeId: 1,
-      processingRecordId: 1,
-      purposeId: 1,
-      returnInstructions: 'send',
-      sentDataTypes: [
-        {
-          dataTypeId: 0,
-          dataLocationIds: [0],
-        },
-      ],
-    },
-  }
+  postSendEvents201Response
 
   postAliases201Response
 
