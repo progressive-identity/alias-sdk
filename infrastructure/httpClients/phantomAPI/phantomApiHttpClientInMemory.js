@@ -77,32 +77,7 @@ class PhantomApiHttpClientInMemory {
     },
   }
 
-  getAliasesAliasId200Response = {
-    code: 200,
-    data: {
-      id: 10,
-      identityId: 32,
-      status: 'assigned',
-      appIdentifiers: [
-        {
-          id: 1,
-          value: 'myValue',
-          type: {
-            id: 2,
-            name: 'mailchimp-member-id',
-            description: 'id of a member in mailchimp',
-          },
-        },
-      ],
-      selectors: [
-        {
-          id: 1,
-          value: 'myValue',
-          dataTypeInstanceId: 'string',
-        },
-      ],
-    },
-  }
+  getAliasesAliasId200Response
 
   async post({ endpoint }) {
     const responseByEndpoint = {
@@ -120,6 +95,10 @@ class PhantomApiHttpClientInMemory {
   async getById({ endpoint }) {
     const responseByEndpoint = { [endpoints.aliases]: this.getAliasesAliasId200Response }
     return responseByEndpoint[endpoint]
+  }
+
+  feedGetAliasByIdResponse(response) {
+    this.getAliasesAliasId200Response = response
   }
 }
 
