@@ -9,10 +9,9 @@ const { GetAliasById } = require('./GetAliasById')
 
 async function TriggerEvent({ data }) {
   const service = locateService()
-
   const event = new Event(data)
 
-  if (config.mode === 'live') {
+  if (service.config.mode === 'live') {
     if (event.createsAlias === 'yes') {
       const {
         data: {
