@@ -8,7 +8,7 @@ const { FileSystemDisk } = require('../fileSystems/fileSystemDisk')
 
 function locateService() {
   const service = {}
-  if (!process.env.DEMO) {
+  if (process.env.NODE_ENV === 'demo') {
     const fileSystem = new FileSystemInMemory()
     service.config = ReadConfigFile({ fileSystem })
     service.phantomApiHttpClient = new PhantomApiHttpClientInMemory()
