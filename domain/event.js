@@ -1,9 +1,19 @@
 const { SentDataType } = require('./sentDataType')
 
 class Event {
-  constructor({ aliasId, createsAlias, eventTypeId, processingRecordId, purposeId, returnInstructions, sentDataTypes }) {
+  constructor({
+    aliasId,
+    createsAlias,
+    appIdentifier,
+    eventTypeId,
+    processingRecordId,
+    purposeId,
+    returnInstructions,
+    sentDataTypes,
+  }) {
     this.aliasId = aliasId
     this.createsAlias = createsAlias
+    this.appIdentifier = appIdentifier
     this.eventTypeId = eventTypeId
     this.processingRecordId = processingRecordId
     this.purposeId = purposeId

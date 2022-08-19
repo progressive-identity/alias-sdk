@@ -1,11 +1,10 @@
-const { ReadConfigFile } = require('./ReadConfigFile')
 const { Event } = require('../domain/event')
 const { locateService } = require('../infrastructure/config/locateService')
 const { RecordEvent } = require('./RecordEvent')
 const { SendEvent } = require('./SendEvent')
 const { CreateIdentity } = require('./CreateIdentity')
 const { CreateAlias } = require('./CreateAlias')
-const { GetAliasById } = require('./GetAliasById')
+const { GetAliasByAppIdentifierAndAppIdentifierType } = require('./GetAliasByAppIdentifierAndAppIdentifierType')
 
 async function TriggerEvent({ data }) {
   const service = locateService()
@@ -29,10 +28,13 @@ async function TriggerEvent({ data }) {
       })
       event.aliasId = id
     } else {
-      const { data: alias } = await GetAliasById({
-        aliasId: event.aliasId,
+      // TODO: À la place de getAliasById, on passe par GetAliasByAppIdentifierAndAppIdentifierType
+      const { data: alias } = await GetAliasByAppIdentifierAndAppIdentifierType({
+        appIdentifierTypeName: event.appIdentifier.type,
+        appIdentifierValue: event.appIdentifier.value,
         phantomApiHttpClient: service.phantomApiHttpClient,
       })
+      event.aliasId = alias.id
     }
     const recordedEvent = await RecordEvent({ event, phantomApiHttpClient: service.phantomApiHttpClient })
     return SendEvent({ eventId: recordedEvent.id, phantomApiHttpClient: service.phantomApiHttpClient })
@@ -43,10 +45,12 @@ async function TriggerEvent({ data }) {
     } = await CreateAlias({ data: { status: 'assigned' }, phantomApiHttpClient: service.phantomApiHttpClient })
     event.aliasId = id
   } else {
-    const { data: alias } = await GetAliasById({
+    // TODO: À la place de getAliasById, on passe par Get an Alias by a AppIdentifier and its AppIdentifierType
+    const { data: alias } = await GetAliasByAppIdentifierAndAppIdentifierType({
       aliasId: event.aliasId,
       phantomApiHttpClient: service.phantomApiHttpClient,
     })
+    event.aliasId = alias.id
   }
   return RecordEvent({ event, phantomApiHttpClient: service.phantomApiHttpClient })
 }
