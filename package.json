@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watchAll --verbose",
-    "test:coverage": "jest -i --coverage --verbose",
+    "test": "vitest run",
+    "test:watch": "vitest --watch --reporter=verbose",
+    "test:coverage": "vitest --coverage --reporter=verbose",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --check **/*.js",
