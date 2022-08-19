@@ -1,6 +1,6 @@
 {
   "name": "alias-sdk",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --check **/*.js",
     "prettier:fix": "prettier --write **/*.js",
-    "postinstall": "husky install"
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
