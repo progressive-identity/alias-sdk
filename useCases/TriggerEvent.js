@@ -28,7 +28,6 @@ async function TriggerEvent({ data }) {
       })
       event.aliasId = id
     } else {
-      // TODO: À la place de getAliasById, on passe par GetAliasByAppIdentifierAndAppIdentifierType
       const { data: alias } = await GetAliasByAppIdentifierAndAppIdentifierType({
         appIdentifierTypeName: event.appIdentifier.type,
         appIdentifierValue: event.appIdentifier.value,
@@ -45,7 +44,6 @@ async function TriggerEvent({ data }) {
     } = await CreateAlias({ data: { status: 'assigned' }, phantomApiHttpClient: service.phantomApiHttpClient })
     event.aliasId = id
   } else {
-    // TODO: À la place de getAliasById, on passe par Get an Alias by a AppIdentifier and its AppIdentifierType
     const { data: alias } = await GetAliasByAppIdentifierAndAppIdentifierType({
       aliasId: event.aliasId,
       phantomApiHttpClient: service.phantomApiHttpClient,
