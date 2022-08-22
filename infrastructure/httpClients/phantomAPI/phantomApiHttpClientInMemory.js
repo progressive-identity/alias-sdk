@@ -77,10 +77,10 @@ class PhantomApiHttpClientInMemory {
     },
   }
 
-  getAliasesAliasId200Response = {
+  getAliasAppIdentifierAppIdentifierType200Response = {
     code: 200,
     data: {
-      id: 10,
+      id: 1,
       identityId: 32,
       status: 'assigned',
       appIdentifiers: [
@@ -117,8 +117,8 @@ class PhantomApiHttpClientInMemory {
     return responseByEndpoint[endpoint]
   }
 
-  async getById({ endpoint }) {
-    const responseByEndpoint = { [endpoints.aliases]: this.getAliasesAliasId200Response }
+  async getByParams({ endpoint }) {
+    const responseByEndpoint = { [endpoints.alias]: this.getAliasAppIdentifierAppIdentifierType200Response }
     return responseByEndpoint[endpoint]
   }
 }
