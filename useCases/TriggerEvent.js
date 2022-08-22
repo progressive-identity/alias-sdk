@@ -45,7 +45,8 @@ async function TriggerEvent({ data }) {
     event.aliasId = id
   } else {
     const { data: alias } = await GetAliasByAppIdentifierAndAppIdentifierType({
-      aliasId: event.aliasId,
+      appIdentifierTypeName: event.appIdentifier.type,
+      appIdentifierValue: event.appIdentifier.value,
       phantomApiHttpClient: service.phantomApiHttpClient,
     })
     event.aliasId = alias.id
