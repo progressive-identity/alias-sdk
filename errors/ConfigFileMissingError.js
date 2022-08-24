@@ -1,6 +1,4 @@
-const { MyError } = require('./MyError')
-
-class FileNotFoundError extends MyError {
+class ConfigFileMissingError extends Error {
   constructor(message) {
     super(message)
     this.name = this.constructor.name
@@ -8,4 +6,4 @@ class FileNotFoundError extends MyError {
   }
 }
 
-module.exports = { FileNotFoundError }
+module.exports = { ConfigFileMissingError }
