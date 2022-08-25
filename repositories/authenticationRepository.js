@@ -4,9 +4,9 @@ function authenticationRepository({ identityBroker, config }) {
   return {
     authenticate: async () => {
       await authClient.getAccessToken()
-      setInterval(() => authClient.getAccessToken(), authClient.getAuthState()?.expiredAt || 3600)
+      setInterval(() => authClient.getAccessToken(), authClient.getAuthState()?.expires_at || 3600)
     },
   }
 }
 
-module.exports = authenticationRepository
+module.exports = { authenticationRepository }

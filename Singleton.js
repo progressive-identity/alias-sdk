@@ -1,17 +1,10 @@
 require('dotenv').config()
 const { configRepository } = require('./repositories/configRepository')
-const authenticationRepository = require('./repositories/authenticationRepository')
-const KeycloakAdapter = require('./repositories/KeycloakAdapter')
+const { authenticationRepository } = require('./repositories/authenticationRepository')
+const { KeycloakAdapter } = require('./adapters/out/KeycloakAdapter')
 
-let _instance = null
+let $instance = null
 
-/* const authenticationResponse = await authenticate({
-  payload: {
-    clientId: config.clientId,
-    clientSecret: config.clientSecret,
-  },
-  authenticationRepository,
-}) */
 function Alias() {
   const config = configRepository.loadConfigFile()
 
@@ -25,10 +18,12 @@ function Alias() {
     },
   }).authenticate()
 
-  if (_instance) return _instance
-  _instance = this
+  // this.triggerEvent = function triggerEvent() {
+  //   triggerEvent()
+  // }
+
+  if ($instance) return $instance
+  $instance = this
 }
 
-const alias = new Alias()
-console.log(alias)
-module.exports = Alias
+module.exports = new Alias()
