@@ -4,7 +4,7 @@ function authenticationRepository({ identityBroker, config }) {
   return {
     authenticate: async () => {
       await authClient.getAccessToken()
-      setInterval(() => authClient.refreshToken(), authClient.getAuthState()?.expiredAt || 3600)
+      setInterval(() => authClient.getAccessToken(), authClient.getAuthState()?.expiredAt || 3600)
     },
   }
 }

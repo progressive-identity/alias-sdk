@@ -1,34 +1,37 @@
 const KcAdminClient = require('@keycloak/keycloak-admin-client').default
 const jwt = require('jsonwebtoken')
-
 const { UnauthorizedError } = require('../errors/UnauthorizedError')
+
+let authState = {}
 
 module.exports = (config) => {
   const adminClient = new KcAdminClient({
     realmName: config.authRealm,
     baseUrl: `${config.authServerUrl}/auth`,
   })
+
   const clientCredentials = Object.freeze({
     grantType: 'client_credentials',
     clientId: config.clientId,
     clientSecret: config.clientKey,
   })
+
   return {
-    getAuthState: () => {},
+    getAuthState: () => authState,
     getAccessToken: async () => {
       try {
+        // Authenticate
         await adminClient.auth(clientCredentials)
         const token = await adminClient.getAccessToken()
-        const decodedToken = jwt.decode(token)
-        console.log({ decodedToken })
+
+        // Store state
+        authState = jwt.decode(token)
       } catch (error) {
-        console.log(error.toJSON())
         throw new UnauthorizedError()
       }
-      // 2. Setup auth state ( i.e isLoggedIn, expiresAt )
     },
     refreshToken: () => {
-      // SDK AccessToken refreshing logic
+      // SDK AccessToken refreshing logic : can be used only when we have a RefreshToken
       // 1. Called upon TokenExpiredError
     },
   }
