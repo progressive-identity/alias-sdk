@@ -1,16 +1,31 @@
 const axios = require('axios')
+const { configRepository } = require('../../repositories/configRepository')
 const { authenticationRepository } = require('../../repositories/authenticationRepository')
 
-const auth = authenticationRepository({ identityBroker: axios, config: { mode: 'live' } })
-const authorization = `Bearer ${auth.getAuthState()?.access_token}`
+const config = configRepository.loadConfigFile()
+const authRepo = authenticationRepository()
 
-// TODO: replace baseURL by eventsApiBaseURL
-const baseURL = 'https://jsonplaceholder.typicode.com/'
 const eventsApiClient = axios.create({
-  baseURL,
+  baseURL: `${config.eventsApiBaseUrl}/v1/api`,
   timeout: 1000,
-  // TODO: replace authorization by KeyCloakAuthorization
-  headers: { Authorization: 'authorization' },
 })
+
+eventsApiClient.interceptors.request.use(async (requestConfig) => {
+  const { access_token: token } = authRepo.getAuthState()
+  const options = {
+    ...requestConfig,
+  }
+
+  options.headers.common.Authorization = `Bearer ${token}`
+
+  return options
+})
+
+eventsApiClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    console.log(error.message)
+  }
+)
 
 module.exports = { eventsApiClient }

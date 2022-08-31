@@ -2,14 +2,9 @@ const { eventsApiClient } = require('../eventsApiAxios')
 
 async function getCompanyId() {
   console.log('getCompanyId')
-
-  //   const { common: headers } = config.headers
-  //   headers.Authorization = `Bearer ${token}`
-  const {
-    data: [{ id: companyId }],
-  } = await eventsApiClient.get('posts')
-  console.log({ companyId })
-  return companyId
+  const response = await eventsApiClient.get('companies')
+  console.log(response)
+  return 1
 }
 
 module.exports = { getCompanyId }

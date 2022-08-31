@@ -1,10 +1,15 @@
-function authenticationRepository({ identityBroker, config }) {
-  const authClient = identityBroker(config)
+const { KeycloakAdapter } = require('../adapters/secondary/KeycloakAdapter')
 
+function authenticationRepository({ identityBroker = new KeycloakAdapter() } = {}) {
   return {
-    authenticate: async () => {
-      await authClient.getAccessToken()
-      setInterval(() => authClient.getAccessToken(), authClient.getAuthState()?.expires_at || 3600)
+    authenticate: () => {
+      // const client = $instance.authClient
+      return identityBroker.getAccessToken().then(() => {
+        setInterval(() => identityBroker.getAccessToken(), identityBroker.getAuthState()?.expires_at || 3600)
+      })
+    },
+    getAuthState: () => {
+      return identityBroker.getAuthState()
     },
   }
 }

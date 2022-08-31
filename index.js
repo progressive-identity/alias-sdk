@@ -17,13 +17,13 @@ async function triggerEvent(event) {
   return null
 }
 
-triggerEvent({
-  createAlias: 'no',
-  eventTypeId: 1,
-  appIdentifier: {
-    name: 'name',
-    value: 'value ',
-  },
-}).then((result) => console.log({ result }))
+// triggerEvent({
+//   createAlias: 'no',
+//   eventTypeId: 1,
+//   appIdentifier: {
+//     name: 'name',
+//     value: 'value ',
+//   },
+// }).then((result) => console.log({ result }))
 
 module.exports = { triggerEvent }

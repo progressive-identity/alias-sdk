@@ -1,8 +1,9 @@
 {
   "authRealm": "alias",
-  "authServerUrl": "https://gateway.alias.dev:8081",
+  "authServerUrl": "https://api.alias.dev:8081",
   "clientId": "demo-alias-sdk",
-  "clientKey": "d67ebef2-05a3-4f66-8cc8-18ae33271dbe",
-  "phantomUrl": "http://localhost:8081",
+  "clientKey": "1496a1c0-4bd4-4bcf-a1e7-83d06f4b3369",
+  "phantomApiBaseUrl": "https://staging-phantom-api.cleverapps.io",
+  "eventsApiBaseUrl": "https://staging-events-api.cleverapps.io",
   "mode": "live"
 }

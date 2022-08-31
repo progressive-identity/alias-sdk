@@ -1,43 +1,46 @@
 const KcAdminClient = require('@keycloak/keycloak-admin-client').default
 const jwt = require('jsonwebtoken')
 const { UnauthorizedError } = require('../../errors/UnauthorizedError')
+const { configRepository } = require('../../repositories/configRepository')
 
-let authState = {}
+let $instance = null
+const $options = configRepository.loadConfigFile()
 
-function KeycloakAdapter(config) {
-  const adminClient = new KcAdminClient({
-    realmName: config.authRealm,
-    baseUrl: `${config.authServerUrl}/auth`,
-  })
-
+function KeycloakAdapter(config = $options) {
   const clientCredentials = Object.freeze({
     grantType: 'client_credentials',
     clientId: config.clientId,
     clientSecret: config.clientKey,
   })
 
-  return {
-    getAuthState: () => authState,
-    getAccessToken: async () => {
-      try {
-        // Authenticate
-        await adminClient.auth(clientCredentials)
-        const token = await adminClient.getAccessToken()
+  this.authState = {}
 
-        // Store state
-        authState = jwt.decode(token)
-        authState.access_token = token
-        authState.expires_at = Math.abs(new Date(authState.exp * 1000) - new Date())
-        console.log(authState)
-      } catch (error) {
-        throw new UnauthorizedError()
-      }
-    },
-    refreshToken: () => {
-      // SDK AccessToken refreshing logic : can be used only when we have a RefreshToken
-      // 1. Called upon TokenExpiredError
-    },
+  this.adminClient = new KcAdminClient({
+    realmName: config.authRealm,
+    baseUrl: `${config.authServerUrl}/auth`,
+  })
+
+  this.getAuthState = function getAuthState() {
+    return this.authState
   }
+
+  this.getAccessToken = async function getAccessToken() {
+    try {
+      // Authenticate
+      await this.adminClient.auth(clientCredentials)
+      const token = await this.adminClient.getAccessToken()
+
+      // Store state
+      this.authState = jwt.decode(token)
+      this.authState.access_token = token
+      this.authState.expires_at = Math.abs(new Date(this.authState.exp * 1000) - new Date())
+    } catch (error) {
+      throw new UnauthorizedError()
+    }
+  }
+
+  if ($instance) return $instance
+  $instance = this
 }
 
 module.exports = { KeycloakAdapter }
