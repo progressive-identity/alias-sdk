@@ -28,6 +28,7 @@ function KeycloakAdapter(config) {
         authState = jwt.decode(token)
         authState.access_token = token
         authState.expires_at = Math.abs(new Date(authState.exp * 1000) - new Date())
+        console.log(authState)
       } catch (error) {
         throw new UnauthorizedError()
       }

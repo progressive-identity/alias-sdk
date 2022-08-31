@@ -3,5 +3,6 @@
   "authServerUrl": "https://gateway.alias.dev:8081",
   "clientId": "demo-alias-sdk",
   "clientKey": "d67ebef2-05a3-4f66-8cc8-18ae33271dbe",
+  "phantomUrl": "http://localhost:8081",
   "mode": "live"
 }

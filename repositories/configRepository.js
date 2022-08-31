@@ -2,7 +2,8 @@ const path = require('path')
 const Joi = require('joi')
 const fs = require('fs')
 const { ConfigFileMissingError } = require('../errors/ConfigFileMissingError')
-const { InvalidConfigFileError } = require('./invalidConfigFileError')
+const { InvalidConfigFileError } = require('../errors/InvalidConfigFileError')
+const { validateSchema } = require('../joi/validateSchema')
 
 function configRepository({ filesystem }) {
   const readConfigFile = () => {
@@ -24,24 +25,17 @@ function configRepository({ filesystem }) {
     }
   }
 
-  const validateConfigFile = (config) => {
-    const configSchema = Joi.object({
-      clientId: Joi.string().required(),
-      clientKey: Joi.string().required(),
-      mode: Joi.string().valid('live', 'offline').required(),
-      authServerUrl: Joi.string().required(),
-      authRealm: Joi.string().required(),
-    })
-    const { error } = configSchema.validate(config)
-    if (error) {
-      throw new InvalidConfigFileError(error.message)
-    }
-    return true
-  }
   return {
     loadConfigFile: () => {
       const config = parseConfigFile(readConfigFile())
-      validateConfigFile(config)
+      const configSchema = Joi.object({
+        clientId: Joi.string().required(),
+        clientKey: Joi.string().required(),
+        mode: Joi.string().valid('live', 'offline').required(),
+        authServerUrl: Joi.string().required(),
+        authRealm: Joi.string().required(),
+      })
+      validateSchema({ value: config, schema: configSchema })
       return config
     },
   }

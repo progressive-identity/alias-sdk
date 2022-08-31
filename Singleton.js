@@ -1,7 +1,7 @@
 require('dotenv').config()
 const { configRepository } = require('./repositories/configRepository')
 const { authenticationRepository } = require('./repositories/authenticationRepository')
-const { KeycloakAdapter } = require('./adapters/out/KeycloakAdapter')
+const { KeycloakAdapter } = require('./adapters/secondary/KeycloakAdapter')
 
 let $instance = null
 
