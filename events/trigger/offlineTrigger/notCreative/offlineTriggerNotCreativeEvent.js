@@ -3,11 +3,11 @@ const { getAliasByAppIdentifier } = require('../../../../api/phantomApi/alias/ge
 
 async function offlineTriggerNotCreativeEvent(event) {
   console.log('offlineTriggerNotCreativeEvent', event)
-  const { id: aliasId } = await getAliasByAppIdentifier({
+  const response = await getAliasByAppIdentifier({
     appIdentifierTypeName: event.appIdentifier.name,
-    appIdentifierTypeValue: event.appIdentifier.value,
+    appIdentifierValue: event.appIdentifier.value,
   })
-  return recordEvent({ ...event, aliasId })
+  // return recordEvent({ ...event, aliasId })
 }
 
 module.exports = { offlineTriggerNotCreativeEvent }

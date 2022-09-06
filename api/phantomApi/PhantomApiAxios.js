@@ -16,7 +16,7 @@ phantomApiClient.interceptors.request.use(async (requestConfig) => {
     ...requestConfig,
   }
 
-  options.headers.common.Authorization = `Bearer ${token}`
+  options.headers.common.authorization = `Bearer ${token}`
 
   return options
 })

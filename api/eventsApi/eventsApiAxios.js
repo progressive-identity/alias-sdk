@@ -16,8 +16,7 @@ eventsApiClient.interceptors.request.use(async (requestConfig) => {
     ...requestConfig,
   }
 
-  options.headers.common.Authorization = `Bearer ${token}`
-
+  options.headers.authorization = `Bearer ${token}`
   return options
 })
 

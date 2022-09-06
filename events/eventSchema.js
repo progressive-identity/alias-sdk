@@ -1,7 +1,7 @@
 const Joi = require('joi')
 
 const eventSchema = Joi.object({
-  createAlias: Joi.string().required().valid('yes', 'no'),
+  createsAlias: Joi.string().required().valid('yes', 'no'),
   eventTypeId: Joi.number().positive().required(),
   appIdentifier: Joi.object({
     value: Joi.string().required(),

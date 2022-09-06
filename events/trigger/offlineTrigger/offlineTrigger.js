@@ -3,10 +3,10 @@ const { offlineTriggerNotCreativeEvent } = require('./notCreative/offlineTrigger
 
 async function offlineTrigger(event) {
   console.log('offlineTrigger', event)
-  if (event.createAlias === 'yes') {
+  if (event.createsAlias === 'yes') {
     return offlineTriggerCreativeEvent(event)
   }
-  if (event.createAlias === 'no') {
+  if (event.createsAlias === 'no') {
     return offlineTriggerNotCreativeEvent(event)
   }
   return null

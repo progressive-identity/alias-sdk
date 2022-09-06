@@ -3,8 +3,7 @@ const { recordEvent } = require('../../../../api/phantomApi/events/recordEvent')
 
 async function offlineTriggerCreativeEvent(event) {
   console.log('offlineTriggerCreativeEvent', event)
-  const { id: aliasId } = await createAlias({ status: 'unassigned' })
-  return recordEvent({ ...event, aliasId })
+  return recordEvent(event)
 }
 
 module.exports = { offlineTriggerCreativeEvent }
