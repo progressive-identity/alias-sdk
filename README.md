@@ -30,16 +30,12 @@ X((offline))
 ```mermaid
   journey
     title Live Scenario 1
-    section createsAlias YES
-      Get companyId: 8: Events API
-    section companyId
-      create identitity: 8: Events API
-    section identityId
-      create alias with status assigned: 8: Phantom API
     section aliasId
       record event: 8: Phantom API
     section eventId
-      send event: 8: Phantom API, Events API
+      send event: 8: Phantom API
+    section eventId
+      receive event: 8: Events API
 ```
 
 ```mermaid
@@ -50,14 +46,14 @@ X((offline))
     section aliasId
       record event: 8: Phantom API
     section eventId
-      send event: 8: Phantom API, Events API
+      send event: 8: Phantom API
+    section eventId
+      receive event: 8: Events API
 ```
 
 ```mermaid
   journey
     title Offline Scenario 1
-    section createsAlias YES
-      create alias with status unassigned: 8: Phantom API
     section aliasId
       record event: 8: Phantom API
 ```
