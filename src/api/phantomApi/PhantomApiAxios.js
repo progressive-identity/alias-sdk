@@ -11,12 +11,19 @@ const phantomApiClient = axios.create({
 })
 
 phantomApiClient.interceptors.request.use(async (requestConfig) => {
-  const { access_token: token } = authRepo.getAuthState()
+  let authState = authRepo.getAuthState()
+  const authenticated = !!authState.access_token
+
+  if (!authenticated) {
+    await authRepo.authenticate()
+    authState = authRepo.getAuthState()
+  }
+
   const options = {
     ...requestConfig,
   }
 
-  options.headers.common.authorization = `Bearer ${token}`
+  options.headers.common.authorization = `Bearer ${authState.access_token}`
 
   return options
 })
