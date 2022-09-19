@@ -35,7 +35,6 @@ function configRepository({ filesystem }) {
         authServerUrl: Joi.string().required(),
         authRealm: Joi.string().required(),
         phantomApiBaseUrl: Joi.string().uri().required(),
-        eventsApiBaseUrl: Joi.string().uri().required(),
       })
       validateSchema({ value: config, schema: configSchema })
       return config
