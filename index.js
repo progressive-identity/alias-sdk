@@ -7,16 +7,16 @@ const { makeTriggerEvent } = require('./src/events/trigger/makeTriggerEvent')
 let $instance = null
 
 function Alias() {
-  const $config = configRepository.loadConfigFile()
-  this.triggerEvent = makeTriggerEvent($config.mode)
+  const { authRealm, authServerUrl, clientId, clientKey, mode } = configRepository.loadConfigFile()
+  this.triggerEvent = makeTriggerEvent(mode)
 
   authenticationRepository({
-    identityBroker: new KeycloakAdapter($config),
+    identityBroker: new KeycloakAdapter(),
     config: {
-      clientId: $config.clientId,
-      clientKey: $config.clientKey,
-      authServerUrl: $config.authServerUrl,
-      authRealm: $config.authRealm,
+      clientId,
+      clientKey,
+      authServerUrl,
+      authRealm,
     },
   }).authenticate()
   if ($instance) return $instance
