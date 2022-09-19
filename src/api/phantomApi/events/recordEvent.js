@@ -1,7 +1,8 @@
 const { phantomApiClient } = require('../PhantomApiAxios')
+const endpoints = require('../endpoints')
 
 async function recordEvent(data) {
-  const response = await phantomApiClient.post('events', { data })
+  const response = await phantomApiClient.post(endpoints.EVENTS, { data })
   return response.data.data
 }
 
