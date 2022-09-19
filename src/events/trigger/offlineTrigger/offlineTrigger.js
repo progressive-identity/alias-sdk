@@ -2,7 +2,6 @@ const { offlineTriggerCreativeEvent } = require('./creative/offlineTriggerCreati
 const { offlineTriggerNotCreativeEvent } = require('./notCreative/offlineTriggerNotCreativeEvent')
 
 async function offlineTrigger(event) {
-  console.log('offlineTrigger', event)
   if (event.createsAlias === 'yes') {
     return offlineTriggerCreativeEvent(event)
   }

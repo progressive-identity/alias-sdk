@@ -2,11 +2,10 @@ const { liveTriggerCreativeEvent } = require('./creative/liveTriggerCreativeEven
 const { liveTriggerNotCreativeEvent } = require('./notCreative/liveTriggerNotCreativeEvent')
 
 async function liveTrigger(event) {
-  console.log('liveTrigger', event)
-  if (event.createAlias === 'yes') {
+  if (event.createsAlias === 'yes') {
     return liveTriggerCreativeEvent(event)
   }
-  if (event.createAlias === 'no') {
+  if (event.createsAlias === 'no') {
     return liveTriggerNotCreativeEvent(event)
   }
   return null

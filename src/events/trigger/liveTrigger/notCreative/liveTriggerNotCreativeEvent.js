@@ -3,7 +3,6 @@ const { sendEvent } = require('../../../../api/phantomApi/send-events/sendEvent'
 const { recordEvent } = require('../../../../api/phantomApi/events/recordEvent')
 
 async function liveTriggerNotCreativeEvent(event) {
-  console.log('liveTriggerNotCreativeEvent', event)
   const { id: aliasId } = await getAliasByAppIdentifier({
     appIdentifierValue: event.appIdentifier.value,
     appIdentifierTypeName: event.appIdentifier.name,

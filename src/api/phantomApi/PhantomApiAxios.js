@@ -7,7 +7,7 @@ const authRepo = authenticationRepository()
 
 const phantomApiClient = axios.create({
   baseURL: `${config.phantomApiBaseUrl}/v1/api`,
-  timeout: 1000,
+  timeout: 3000,
 })
 
 phantomApiClient.interceptors.request.use(async (requestConfig) => {

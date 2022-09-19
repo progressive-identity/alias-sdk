@@ -7,8 +7,8 @@ const eventSchema = Joi.object({
     value: Joi.string().required(),
     name: Joi.string().required(),
   })
-    .when('createAlias', { is: 'no', then: Joi.required() })
-    .when('createAlias', {
+    .when('createsAlias', { is: 'no', then: Joi.required() })
+    .when('createsAlias', {
       is: 'yes',
       then: Joi.forbidden(),
     }),
