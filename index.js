@@ -8,7 +8,7 @@ let $instance = null
 
 function Alias() {
   const $config = configRepository.loadConfigFile()
-  this.triggerEvent = makeTriggerEvent($config)
+  this.triggerEvent = makeTriggerEvent($config.mode)
 
   authenticationRepository({
     identityBroker: new KeycloakAdapter($config),
