@@ -33,6 +33,12 @@
     "prettier": "2.7.1"
   },
   "dependencies": {
+    "@keycloak/keycloak-admin-client": "^18.0.2",
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "keycloak-verify": "^0.4.0",
     "vitest": "^0.22.1"
   }
 }

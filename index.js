@@ -1,3 +1,16 @@
-const { TriggerEvent } = require('./useCases/TriggerEvent')
+require('dotenv').config()
+const { makeTriggerEvent } = require('./src/events/trigger/makeTriggerEvent')
+const { configRepository } = require('./src/repositories/configRepository')
 
-module.exports = { TriggerEvent }
+let $instance = null
+
+function Alias(configRepo = configRepository) {
+  const { mode } = configRepo.loadConfigFile()
+
+  this.triggerEvent = makeTriggerEvent(mode)
+
+  if ($instance) return $instance
+  $instance = this
+}
+
+module.exports = Alias
