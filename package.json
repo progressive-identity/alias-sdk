@@ -21,8 +21,8 @@
     "npm": "8.18.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "17.0.3",
-    "@commitlint/config-conventional": "17.0.3",
+    "@commitlint/cli": "17.3.0",
+    "@commitlint/config-conventional": "17.3.0",
     "@vitest/coverage-c8": "0.22.1",
     "eslint": "8.22.0",
     "eslint-config-airbnb-base": "15.0.0",
